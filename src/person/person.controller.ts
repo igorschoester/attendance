@@ -1,42 +1,43 @@
-import {Body, Controller, Get, Param, Post, Delete} from '@nestjs/common';
-import {DeleteResult} from 'typeorm';
-import {PersonService} from './person.service';
-import {Person} from './person.entity';
-import {CreatePersonDto} from '../dto/create-person.dto';
-import {CheckInDto} from '../dto/checkIn.dto';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
+import { Attendance } from '../attendance/attendance.entity';
+import { CheckInDto } from '../dto/checkIn.dto';
+import { CreatePersonDto } from '../dto/create-person.dto';
+import { Person } from './person.entity';
+import { PersonService } from './person.service';
 
-@Controller('person')
+@Controller( 'person' )
 export class PersonController {
-    constructor(private readonly personService: PersonService) {
-    }
+	constructor( private readonly personService: PersonService ) {
+	}
 
-    @Post()
-    async create(@Body() createPersonDto: CreatePersonDto): Promise<Person[]> {
-        return await this.personService.create(createPersonDto);
-    }
+	@Post()
+	async create( @Body() createPersonDto: CreatePersonDto ): Promise<Person[]> {
+		return await this.personService.create( createPersonDto );
+	}
 
-    @Get()
-    async findAll(): Promise<Person[]> {
-        return await this.personService.findAll();
-    }
+	@Get()
+	async findAll(): Promise<Person[]> {
+		return await this.personService.findAll();
+	}
 
-    @Get(':id')
-    async findOne(@Param('id') id): Promise<Person> {
-        return await this.personService.findOne(id);
-    }
+	@Get( ':id' )
+	async findOne( @Param( 'id' ) id ): Promise<Person> {
+		return await this.personService.findOne( id );
+	}
 
-    @Delete(':id')
-    async remove(@Param('id') id): Promise<DeleteResult> {
-        return await this.personService.remove(id);
-    }
+	@Delete( ':id' )
+	async remove( @Param( 'id' ) id ): Promise<DeleteResult> {
+		return await this.personService.remove( id );
+	}
 
-    @Post(':id/checkIn')
-    async checkIn(@Param('id') id, @Body() checkInDto: CheckInDto): Promise<Person>  {
-        return await this.personService.checkIn( id, checkInDto );
-    }
+	@Post( ':id/checkIn' )
+	async checkIn( @Param( 'id' ) id, @Body() checkInDto: CheckInDto ): Promise<Attendance> {
+		return await this.personService.checkIn( id, checkInDto );
+	}
 
-    @Delete(':id/checkOut')
-    async checkOut(@Param('id') id): Promise<Person>  {
-        return await this.personService.checkOut(id);
-    }
+	@Delete( ':id/checkOut' )
+	async checkOut( @Param( 'id' ) id ): Promise<DeleteResult> {
+		return await this.personService.checkOut( id );
+	}
 }

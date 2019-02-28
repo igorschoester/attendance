@@ -1,3 +1,3 @@
 export class CheckInDto {
-    readonly buildingId: string;
+	readonly buildingId: string;
 }
