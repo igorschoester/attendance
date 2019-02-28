@@ -2,7 +2,7 @@ import {Body, Controller, Get, Param, Post, Delete} from '@nestjs/common';
 import {DeleteResult} from 'typeorm';
 import {BuildingService} from './building.service';
 import {Building} from './building.entity';
-import {CreateBuildingDto} from './create-building.dto';
+import {CreateBuildingDto} from '../dto/create-building.dto';
 
 @Controller('building')
 export class BuildingController {

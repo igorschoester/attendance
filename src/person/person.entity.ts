@@ -20,6 +20,6 @@ export class Person {
     updatedAt: Date;
 
     @ManyToMany(() => Building, building => building.persons)
-    @JoinTable()
+    @JoinTable({ name: 'attendance' })
     buildings: Building[];
 }
